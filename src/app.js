@@ -6,6 +6,8 @@ import morgan from "morgan";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 
+import applyRoutes from "./routes/applyRoutes";
+
 const app = express();
 dotenv.config();
 
@@ -56,8 +58,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 // Routes
-
-
+app.use("/api/EagleSpritAcademy/application", applyRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({

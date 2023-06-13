@@ -4,12 +4,11 @@
   "description": "EagleSpiritAcademyBackend",
   "main": "index.js",
   "scripts": {
-    "test": "npm test",
-    "start": "npm run build && npm run seed && node ./build/src/index.js",
+    "start": "npm run build && node ./build/src/index.js",
     "start:dev": "nodemon --exec babel-node ./src/index.js",
     "clean": "rm -rf build && mkdir build",
     "build-babel": "babel -d ./build/src/ ./src/ -s",
-    "build": "npm run clean && npm run build-babel"
+    "build": "npm run build-babel"
   },
   "author": "muhoza",
   "license": "ISC",
