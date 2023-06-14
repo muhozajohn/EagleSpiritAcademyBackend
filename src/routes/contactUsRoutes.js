@@ -11,7 +11,7 @@ import {
 const contactUsRoutes = express.Router();
 
 contactUsRoutes.post("/sendMessage", fileUpload.single("file"), createMessage);
-contactUsRoutes.post("/updateMessage/:id", fileUpload.single("file"),  updateMessage);
+contactUsRoutes.put("/updateMessage/:id", fileUpload.single("file"),  updateMessage);
 contactUsRoutes.get("/readMessage", readMessage);
 contactUsRoutes.get("/readMessageById/:id", readMessageBYId);
 contactUsRoutes.get("/deleteMessage/:id", deleteMessage);

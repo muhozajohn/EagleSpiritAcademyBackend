@@ -48,7 +48,7 @@ export const readMessageBYId = async (req, res) => {
     const read = await contactUs.findById(id);
     return res.status(200).json({
       statusbar: "Success",
-      message: "All message Retrived Succefully",
+      message: "Single Message Retrived Succefully",
       data: read,
     });
   } catch (error) {
@@ -87,6 +87,7 @@ export const deleteMessage = async (req, res) => {
 export const updateMessage = async (req, res) => {
   try {
     const { id } = req.params;
+    let { firstname, lastname, email, Tel, message } = req.body;
     const updateMsg = await contactUs.findById(id);
     if (!updateMsg) {
       return res.status(404).json({
@@ -94,7 +95,13 @@ export const updateMessage = async (req, res) => {
         message: "Id Not Found",
       });
     }
-    await contactUs.findByIdAndUpdate(id);
+    await contactUs.findByIdAndUpdate(id, {
+      firstname,
+      lastname,
+      email,
+      Tel,
+      message,
+    });
     return res.status(200).json({
       statusbar: "Success",
       message: "Message Updated Succefully",
