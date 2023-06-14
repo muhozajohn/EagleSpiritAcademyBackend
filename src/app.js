@@ -7,6 +7,7 @@ import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 
 import applyRoutes from "./routes/applyRoutes";
+import contactUsRoutes from "./routes/contactUsRoutes";
 
 const app = express();
 dotenv.config();
@@ -59,6 +60,7 @@ app.use("/docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 // Routes
 app.use("/api/EagleSpritAcademy/application", applyRoutes);
+app.use("/api/EagleSpritAcademy/contactus", contactUsRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({
