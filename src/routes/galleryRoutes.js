@@ -4,6 +4,6 @@ import { createImage } from "../controllers/galleryController";
 
 const galleryRoutes = express.Router();
 
-galleryRoutes.post("/create", fileUpload.single("Gallery"), createImage)
+galleryRoutes.post("/create", fileUpload.single("Gallery"), createImage);
 
 export default galleryRoutes;
