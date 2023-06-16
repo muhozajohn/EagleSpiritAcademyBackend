@@ -43,8 +43,8 @@ const options = {
     ],
     servers: [
       {
-        // url: "https://madeinapi.onrender.com",
-        url: "http://localhost:4200",
+        url: "https://eaglespiritacademy.onrender.com",
+
       },
     ],
   },

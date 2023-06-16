@@ -1,16 +1,18 @@
 import blog from "../models/blogModels";
 import { uploadToCloud } from "../helper/cloud";
+import users from "../models/userModels";
 
 // create Blog
 export const CreateBlog = async (req, res) => {
   let { title, blogImage, content, author, dateCreated } = req.body;
+  console.log(req.users);
   try {
     const result = await uploadToCloud(req.file, res);
     const makeBlog = await blog.create({
       title,
       blogImage: result?.secure_url || "profile.jpg",
       content,
-      author,
+      author: req.users.lastname,
       dateCreated,
     });
     return res.status(200).json({

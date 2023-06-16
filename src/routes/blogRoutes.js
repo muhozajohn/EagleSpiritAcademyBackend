@@ -7,10 +7,11 @@ import {
   deleteBlog,
   UpdateeBlog,
 } from "../controllers/blogController";
+import Authorization from "../middleware/Autho";
 
 const blogRoutes = express.Router();
 
-blogRoutes.post("/createBlog", fileUpload.single("blogImage"), CreateBlog);
+blogRoutes.post("/createBlog", Authorization, fileUpload.single("blogImage"), CreateBlog);
 blogRoutes.get("/readBlog", getAllBlog);
 blogRoutes.get("/readOneBlog/:id", getOneBlog);
 blogRoutes.delete("/deleteBlog/:id", deleteBlog);

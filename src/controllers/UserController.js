@@ -6,7 +6,7 @@ import bcrypt, { genSalt, hash } from "bcrypt";
 // creation of users
 
 export const createUser = async (req, res) => {
-  let { firstname, lastname, email, password, userProfile } = req.body;
+  let { firstname, lastname,username, email, password, userProfile } = req.body;
   try {
     const result = await uploadToCloud(req.file, res);
     const salt = await bcrypt.genSalt(10);
@@ -14,6 +14,7 @@ export const createUser = async (req, res) => {
     const createAccount = await users.create({
       firstname,
       lastname,
+      username,
       email,
       password: hashedPass,
       userProfile:
@@ -37,6 +38,63 @@ export const createUser = async (req, res) => {
     return res.status(500).json({
       statusbar: "Failed",
       message: "Can't Create User Account",
+      error: error.message,
+    });
+  }
+};
+
+// userLogin
+
+export const login = async (req, res) => {
+  try {
+    const userLogin = await users.findOne({
+      username: req.body.username,
+      email: req.body.email,
+    });
+    if (!userLogin) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    const isMatch = await bcrypt.compare(req.body.password, userLogin.password);
+    if (!isMatch) {
+      return res.status(404).json({
+        message: "Password inorect",
+      });
+    }
+    const token = await Jwt.sign(
+      { id: userLogin._id },
+      process.env.JWT_SECRET,
+      { expiresIn: process.env.EXPIRE_DATE }
+    );
+    res.status(200).json({
+      message: "logedin success",
+      users: userLogin,
+      token: token,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Fail to retrive data",
+      error: error.message,
+    });
+  }
+};
+
+// getAll user
+
+export const getAllUsers = async (req, res) => {
+  try {
+    const getAll = await users.find();
+    return res.status(200).json({
+      statusbar: "Success",
+      message: "All users Data Fetched Well",
+      data: getAll,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      statusbar: "Failed",
+      message: "All users Data Not Fetched Well",
       error: error.message,
     });
   }
