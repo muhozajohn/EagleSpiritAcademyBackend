@@ -50,35 +50,50 @@
 /**
  * @swagger
  * /api/EagleSpritAcademy/users/login:
- *  post:
- *      summary: "Login on a Eagle Spirit Academy"
- *      tags: [Users]
- *      description: "Needed is Username, email and password"
- *      consumes:
- *        - multipart/form-data
- *      parameters:
- *       - in: formData
- *         name: username
- *         type: string
- *         required: true
- *       - in: formData
- *         name: email
- *         type: string
- *         required: true
- *       - in: formData
- *         name: password
- *         type: string
- *         required: true
- *
- *      responses:
- *       "201":
- *         description: "Account created"
- *       "200":
- *         description: Success
- *       "403":
- *         description: "Account creation failed"
- *
+ *   post:
+ *     summary: login for user
+ *     tags: [Users]
+ *     description: Log in an existing user
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *                 description: The email for the user
+ *               email:
+ *                 type: string
+ *                 description: The username for the user
+ *               password:
+ *                 type: string
+ *                 description: The password for the user
+ *     responses:
+ *       200:
+ *         description: Successful operation
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   description: The status of the operation
+ *                 message:
+ *                   type: string
+ *                   description: The message to the user
+ *                 data:
+ *                   type: string
+ *                   description: The JWT assigned to the user
+ *       400:
+ *         description: Bad request
  */
+
+// delte user
+/**
+
 // Get all users
 /**
  * @swagger
@@ -101,61 +116,55 @@
 // Update a user
 
 // =============================update users=========================
+// Blog Update
+
 /**
  * @swagger
- *
  * /api/EagleSpritAcademy/users/update/{id}:
  *   put:
- *     summary: Update an event by ID
- *     tags: [Users]
- *     description: Update an existing event with new data.
+ *     tags:
+ *       - Users
+ *     description: Update post by postId
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
+ *       - name: postId
+ *         in: path
+ *         description: ID of the post to update
  *         required: true
- *         description: The ID of the event to update.
- *     requestBody:
- *       required: true
- *       description: The updated event data, including an image file.
- *       content:
- *         multipart/form-data:
- *           schema:
- *             type: object
- *             properties:
- *               firstname:
- *                 type: string
- *                 description: The updated firstName of the User.
- *               lastname:
- *                 type: string
- *                 description: The updated lastName of the user.
- *               username:
- *                 type: string
- *                 description: The updated username of the user.
- *               email:
- *                 type: string
- *                 description: The updated email of the User.
- *               password:
- *                 type: string
- *                 password: The updated lastName of the user.
- *               userProfile:
- *                 type: string
- *                 format: binary
- *                 description: An updated image file for the user.
+ *         type: string
+ *       - name: firstname
+ *         in: body
+ *         description: The firstname of user
+ *         required: true
+ *         type: string
+ *       - name: lastname
+ *         in: body
+ *         description: The lastname of user
+ *         required: true
+ *         type: string
+ *       - name: username
+ *         in: body
+ *         description: The username of user
+ *         required: true
+ *         type: string
+ *       - name: email
+ *         in: body
+ *         description: The email of user
+ *         required: true
+ *         type: string
+ *       - name: password
+ *         in: body
+ *         description: The password of user
+ *         required: true
+ *         type: string
  *     responses:
  *       200:
- *         description: OK. Returns the updated User.
- *       500:
- *         description: Internal Server Error. Something went wrong on the server.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   description: A message describing the error.
+ *         description: Update success
+ *       401:
+ *         description: Unauthorized
+ *       404:
+ *         description: Post not found
  */
 // delte user
 /**
