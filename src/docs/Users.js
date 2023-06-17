@@ -53,7 +53,7 @@
  *  post:
  *      summary: "Login on a Eagle Spirit Academy"
  *      tags: [Users]
- *      description: "Needed is  email and password"
+ *      description: "Needed is Username, email and password"
  *      consumes:
  *        - multipart/form-data
  *      parameters:
@@ -78,4 +78,104 @@
  *       "403":
  *         description: "Account creation failed"
  *
+ */
+// Get all users
+/**
+ * @swagger
+ * /api/EagleSpritAcademy/users/read:
+ *   get:
+ *     tags:
+ *       - Users
+ *     description: Returns all Users
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: An array of posts
+ *         schema:
+ *           type: array
+ *       500:
+ *         description: Internal server error
+ */
+
+// Update a user
+
+// =============================update users=========================
+/**
+ * @swagger
+ *
+ * /api/EagleSpritAcademy/users/update/{id}:
+ *   put:
+ *     summary: Update an event by ID
+ *     tags: [Users]
+ *     description: Update an existing event with new data.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The ID of the event to update.
+ *     requestBody:
+ *       required: true
+ *       description: The updated event data, including an image file.
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               firstname:
+ *                 type: string
+ *                 description: The updated firstName of the User.
+ *               lastname:
+ *                 type: string
+ *                 description: The updated lastName of the user.
+ *               username:
+ *                 type: string
+ *                 description: The updated username of the user.
+ *               email:
+ *                 type: string
+ *                 description: The updated email of the User.
+ *               password:
+ *                 type: string
+ *                 password: The updated lastName of the user.
+ *               userProfile:
+ *                 type: string
+ *                 format: binary
+ *                 description: An updated image file for the user.
+ *     responses:
+ *       200:
+ *         description: OK. Returns the updated User.
+ *       500:
+ *         description: Internal Server Error. Something went wrong on the server.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: A message describing the error.
+ */
+// delte user
+/**
+ * @swagger
+ *  /api/EagleSpritAcademy/users/delete/{id}:
+ *   delete:
+ *     tags: [Users]
+ *     description: Deletes a user
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the user to delete
+ *     responses:
+ *       201:
+ *         description: User has been deleted
+ *       404:
+ *         description: User ID not found
+ *       500:
+ *         description: Failed To Delete User
  */

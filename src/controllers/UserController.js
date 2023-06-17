@@ -6,7 +6,8 @@ import bcrypt, { genSalt, hash } from "bcrypt";
 // creation of users
 
 export const createUser = async (req, res) => {
-  let { firstname, lastname,username, email, password, userProfile } = req.body;
+  let { firstname, lastname, username, email, password, userProfile } =
+    req.body;
   try {
     const result = await uploadToCloud(req.file, res);
     const salt = await bcrypt.genSalt(10);
@@ -95,6 +96,72 @@ export const getAllUsers = async (req, res) => {
     return res.status(500).json({
       statusbar: "Failed",
       message: "All users Data Not Fetched Well",
+      error: error.message,
+    });
+  }
+};
+
+// Update User
+
+export const updateUsers = async (req, res) => {
+  let { firstname, lastname, username, email, password, userProfile } =
+    req.body;
+  try {
+    const { id } = req.params;
+    const getId = await users.findById(id);
+    if (!getId) {
+      return res.status(404).json({
+        statusbar: "Failed",
+        message: "User id Not Found",
+      });
+    }
+    const result = await uploadToCloud(req.file, res);
+    const salt = await bcrypt.genSalt(10);
+    const hashedPass = await bcrypt.hash(password, salt);
+    await users.findByIdAndUpdate(id, {
+      firstname,
+      lastname,
+      username,
+      email,
+      password: hashedPass,
+      userProfile:
+        result?.secure_url ||
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+    });
+    return res.status(200).json({
+      statusbar: "Success",
+      message: "User account Updated Well",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      statusbar: "Failed",
+      message: "Can't Update User",
+      error: error.message,
+    });
+  }
+};
+
+//delete user
+
+export const deleteUsers = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const getid = await users.findById(id);
+    if (!getid) {
+      return res.status(404).json({
+        statusbar: "Failed",
+        message: "User Id Not Found",
+      });
+    }
+    await users.findByIdAndDelete(id);
+    return res.status(200).json({
+      statusbar: "Success",
+      message: "User Account Deleted Successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      statusbar: "Failed",
+      message: "Can't Delete User",
       error: error.message,
     });
   }
