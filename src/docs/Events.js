@@ -1,9 +1,9 @@
 /**
  * @swagger
- * /api/EagleSpritAcademy/blog/createBlog:
+ * /api/EagleSpritAcademy/events/createEvent:
  *   post:
- *     summary: Create a new Blog
- *     tags: [Blog]
+ *     summary: Create a new Event
+ *     tags: [Event]
  *     consumes:
  *       - multipart/form-data
  *     requestBody:
@@ -15,16 +15,16 @@
  *               title:
  *                 type: string
  *                 required: true
- *                 description: The title of Blog
+ *                 description: The title of Event
  *               content:
  *                 type: string
  *                 required: true
- *                 description: The content of blog
- *               blogImage:
+ *                 description: The content of Event
+ *               eventImage:
  *                 type: string
  *                 format: binary
  *                 required: true
- *                 description: The Image of Blog
+ *                 description: The Image of Event
  *     responses:
  *       200:
  *         description: Returns the created user
@@ -36,10 +36,10 @@
 
 /**
  * @swagger
- * /api/EagleSpritAcademy/blog/updateBlog/{id}:
+ * /api/EagleSpritAcademy/events/updateEvent/{id}:
  *   put:
  *     tags:
- *       - Blog
+ *       - Event
  *     description: Update post by postId
  *     security:
  *       - bearerAuth: []
@@ -51,19 +51,19 @@
  *         type: string
  *       - name: title
  *         in: body
- *         description: The Title of Blog
+ *         description: The Title of Event
  *         required: true
  *         type: string
  *       - name: content
  *         in: body
- *         description: The Content of Blog
+ *         description: The Content of Event
  *         required: true
  *         type: string
- *       - name: blogImage
+ *       - name: eventImage
  *         type: string
  *         format: file
  *         required: true
- *         description: The Image of Blog
+ *         description: The Image of Event
  *     responses:
  *       200:
  *         description: Update success
@@ -73,14 +73,14 @@
  *         description: Post not found
  */
 
-// Get all Blog
+// Get all Event
 /**
  * @swagger
- * /api/EagleSpritAcademy/blog/readBlog:
+ * /api/EagleSpritAcademy/events/readEvent:
  *   get:
  *     tags:
- *       - Blog
- *     description: Returns all Blogs
+ *       - Event
+ *     description: Returns all Events
  *     produces:
  *       - application/json
  *     responses:
@@ -91,43 +91,43 @@
  *       500:
  *         description: Internal server error
  */
-// Get one Blog
+// Get one Event
 /**
  * @swagger
- * /api/EagleSpritAcademy/blog/readOneBlog/{id}:
+ * /api/EagleSpritAcademy/events/readOneEvent/{id}:
  *   get:
- *     tags: [Blog]
- *     description: Display one Blog
+ *     tags: [Event]
+ *     description: Display one Event
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: ID of the Blog to be Displayed
+ *         description: ID of the Event to be Displayed
  *     responses:
  *       201:
  *         description: User has been Displayed
  *       404:
  *         description: User ID not found
  *       500:
- *         description: Failed To Retrieve  Blog
+ *         description: Failed To Retrieve  Event
  */
 
 // delte user
 /**
  * @swagger
- *  /api/EagleSpritAcademy/blog/deleteBlog/{id}:
+ *  /api/EagleSpritAcademy/events/deleteEvent/{id}:
  *   delete:
- *     tags: [Blog]
- *     description: Deletes one Blog
+ *     tags: [Event]
+ *     description: Deletes one Event
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: ID of the Blog to delete
+ *         description: ID of the Event to delete
  *     responses:
  *       201:
  *         description: User has been deleted
