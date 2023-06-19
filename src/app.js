@@ -11,6 +11,7 @@ import contactUsRoutes from "./routes/contactUsRoutes";
 import blogRoutes from "./routes/blogRoutes";
 import galleryRoutes from "./routes/galleryRoutes";
 import userRoutes from "./routes/userRoutes";
+import eventRoutes from "./routes/eventsRoutes";
 
 const app = express();
 dotenv.config();
@@ -67,6 +68,7 @@ app.use("/api/EagleSpritAcademy/contactus", contactUsRoutes);
 app.use("/api/EagleSpritAcademy/blog", blogRoutes);
 app.use("/api/EagleSpritAcademy/gallery", galleryRoutes);
 app.use("/api/EagleSpritAcademy/users", userRoutes);
+app.use("/api/EagleSpritAcademy/events", eventRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({
