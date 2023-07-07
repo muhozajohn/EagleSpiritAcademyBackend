@@ -7,7 +7,8 @@ export const Createnews = async (req, res) => {
   let { title, newsImage, content, author } = req.body;
   console.log(req.users);
   try {
-    const result = await uploadToCloud(req.file, res);
+     let result;
+     if (req.files) result = await uploadToCloud(req.file, res);
     const makenews = await news.create({
       title,
       newsImage: result?.secure_url || "profile.jpg",
@@ -108,7 +109,8 @@ export const Updateenews = async (req, res) => {
         message: "Id Not Found",
       });
     }
-    const result = await uploadToCloud(req.file, res);
+     let result;
+     if (req.files) result = await uploadToCloud(req.file, res);
     await news.findByIdAndUpdate(id, {
       title,
       newsImage: result?.secure_url || "profile.jpg",

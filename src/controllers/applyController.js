@@ -21,7 +21,8 @@ export const createApplication = async (req, res) => {
     stState,
   } = req.body;
   try {
-    const result = await uploadToCloud(req.file, res);
+    let result;
+    if (req.files) result = await uploadToCloud(req.file, res);
     const application = await apply.create({
       pname,
       pnumber,
@@ -48,7 +49,7 @@ export const createApplication = async (req, res) => {
       data: application,
     });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       statusbar: "Failed",
       message: "Application Failed to be Created",
       error: error.message,

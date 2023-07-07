@@ -7,7 +7,8 @@ export const CreateEvent = async (req, res) => {
   let { title, eventImage, content, author } = req.body;
   console.log(req.users);
   try {
-    const result = await uploadToCloud(req.file, res);
+    let result;
+    if (req.files) result = await uploadToCloud(req.file, res);
     const makeEvent = await event.create({
       title,
       eventImage: result?.secure_url || "profile.jpg",
@@ -108,7 +109,8 @@ export const UpdateeEvent = async (req, res) => {
         message: "Id Not Found",
       });
     }
-    const result = await uploadToCloud(req.file, res);
+     let result;
+     if (req.files) result = await uploadToCloud(req.file, res);
     await event.findByIdAndUpdate(id, {
       title,
       eventImage: result?.secure_url || "profile.jpg",

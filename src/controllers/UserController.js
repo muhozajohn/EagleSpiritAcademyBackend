@@ -9,7 +9,8 @@ export const createUser = async (req, res) => {
   let { firstname, lastname, username, email, password, userProfile } =
     req.body;
   try {
-    const result = await uploadToCloud(req.file, res);
+   let result;
+   if (req.files) result = await uploadToCloud(req.file, res);
     const salt = await bcrypt.genSalt(10);
     const hashedPass = await bcrypt.hash(password, salt);
     const createAccount = await users.create({
@@ -115,7 +116,8 @@ export const updateUsers = async (req, res) => {
         message: "User id Not Found",
       });
     }
-    const result = await uploadToCloud(req.file, res);
+     let result;
+     if (req.files) result = await uploadToCloud(req.file, res);
     const salt = await bcrypt.genSalt(10);
     const hashedPass = await bcrypt.hash(password, salt);
     await users.findByIdAndUpdate(id, {

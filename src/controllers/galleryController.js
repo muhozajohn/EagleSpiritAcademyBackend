@@ -6,7 +6,8 @@ import gallery from "../models/galleryModels";
 export const createImage = async (req, res) => {
   try {
     let { Gallery } = req.body;
-    const result = await uploadToCloud(req.file, res);
+    let result;
+    if (req.files) result = await uploadToCloud(req.file, res);
     const makeAlbum = await gallery.create({
       Gallery:
         result?.secure_url ||
