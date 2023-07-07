@@ -10,7 +10,7 @@ export const createUser = async (req, res) => {
     req.body;
   try {
    let result;
-   if (req.files) result = await uploadToCloud(req.file, res);
+   if (req.file) result = await uploadToCloud(req.file, res);
     const salt = await bcrypt.genSalt(10);
     const hashedPass = await bcrypt.hash(password, salt);
     const createAccount = await users.create({
@@ -117,7 +117,7 @@ export const updateUsers = async (req, res) => {
       });
     }
      let result;
-     if (req.files) result = await uploadToCloud(req.file, res);
+     if (req.file) result = await uploadToCloud(req.file, res);
     const salt = await bcrypt.genSalt(10);
     const hashedPass = await bcrypt.hash(password, salt);
     await users.findByIdAndUpdate(id, {

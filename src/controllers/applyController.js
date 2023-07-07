@@ -22,7 +22,7 @@ export const createApplication = async (req, res) => {
   } = req.body;
   try {
     let result;
-    if (req.files) result = await uploadToCloud(req.file, res);
+    if (req.file)  result = await uploadToCloud(req.file, res);
     const application = await apply.create({
       pname,
       pnumber,

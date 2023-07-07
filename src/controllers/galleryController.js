@@ -7,10 +7,10 @@ export const createImage = async (req, res) => {
   try {
     let { Gallery } = req.body;
     let result;
-    if (req.files) result = await uploadToCloud(req.file, res);
+    if (req.file) result = await uploadToCloud(req.file, res);
     const makeAlbum = await gallery.create({
       Gallery:
-        result?.secure_url ||
+        result?.secure_url || 
         "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
     });
     return res.status(200).json({

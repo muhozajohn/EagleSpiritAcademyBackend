@@ -8,7 +8,7 @@ export const CreateEvent = async (req, res) => {
   console.log(req.users);
   try {
     let result;
-    if (req.files) result = await uploadToCloud(req.file, res);
+    if (req.file) result = await uploadToCloud(req.file, res);
     const makeEvent = await event.create({
       title,
       eventImage: result?.secure_url || "profile.jpg",
@@ -110,7 +110,7 @@ export const UpdateeEvent = async (req, res) => {
       });
     }
      let result;
-     if (req.files) result = await uploadToCloud(req.file, res);
+     if (req.file) result = await uploadToCloud(req.file, res);
     await event.findByIdAndUpdate(id, {
       title,
       eventImage: result?.secure_url || "profile.jpg",

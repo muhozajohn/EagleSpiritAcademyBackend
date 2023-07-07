@@ -8,7 +8,7 @@ export const Createnews = async (req, res) => {
   console.log(req.users);
   try {
      let result;
-     if (req.files) result = await uploadToCloud(req.file, res);
+     if (req.file) result = await uploadToCloud(req.file, res);
     const makenews = await news.create({
       title,
       newsImage: result?.secure_url || "profile.jpg",
@@ -110,7 +110,7 @@ export const Updateenews = async (req, res) => {
       });
     }
      let result;
-     if (req.files) result = await uploadToCloud(req.file, res);
+     if (req.file) result = await uploadToCloud(req.file, res);
     await news.findByIdAndUpdate(id, {
       title,
       newsImage: result?.secure_url || "profile.jpg",
