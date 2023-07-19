@@ -50,7 +50,6 @@ export const createUser = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const userLogin = await users.findOne({
-      username: req.body.username,
       email: req.body.email,
     });
     if (!userLogin) {
