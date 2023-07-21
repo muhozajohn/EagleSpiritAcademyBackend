@@ -128,7 +128,7 @@ export const updateUsers = async (req, res) => {
     if (req.file) result = await uploadToCloud(req.file, res);
     const salt = await bcrypt.genSalt(10);
     const hashedPass = await bcrypt.hash(password, salt);
-    await users.findByIdAndUpdate(id, {
+    const updatedData = await users.findByIdAndUpdate(id, {
       firstname,
       lastname,
       username,
@@ -141,6 +141,7 @@ export const updateUsers = async (req, res) => {
     return res.status(200).json({
       statusbar: "Success",
       message: "User account Updated Well",
+      data: updatedData,
     });
   } catch (error) {
     return res.status(500).json({
@@ -163,10 +164,11 @@ export const deleteUsers = async (req, res) => {
         message: "User Id Not Found",
       });
     }
-    await users.findByIdAndDelete(id);
+    const updatedData = await users.findByIdAndDelete(id);
     return res.status(200).json({
       statusbar: "Success",
       message: "User Account Deleted Successfully",
+      data: updatedData,
     });
   } catch (error) {
     return res.status(500).json({

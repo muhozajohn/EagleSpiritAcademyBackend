@@ -21,8 +21,17 @@ export const createApplication = async (req, res) => {
     stState,
   } = req.body;
   try {
+    const userEmail = await users.findOne({
+      email: req.body.email,
+    });
+    if (userEmail) {
+      return res.status(500).json({
+        message: "Email Already Exist",
+      });
+    }
+
     let result;
-    if (req.file)  result = await uploadToCloud(req.file, res);
+    if (req.file) result = await uploadToCloud(req.file, res);
     const application = await apply.create({
       pname,
       pnumber,

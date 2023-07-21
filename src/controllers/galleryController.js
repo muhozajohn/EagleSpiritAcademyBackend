@@ -105,7 +105,7 @@ export const updateGallery = async (req, res) => {
       });
     }
     const result = await uploadToCloud(req.file, res);
-    await gallery.findByIdAndUpdate(id, {
+    const updatedData = await gallery.findByIdAndUpdate(id, {
       Gallery: result?.secure_url || profile.jpg,
     });
   } catch (error) {

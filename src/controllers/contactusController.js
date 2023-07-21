@@ -95,7 +95,7 @@ export const updateMessage = async (req, res) => {
         message: "Id Not Found",
       });
     }
-    await contactUs.findByIdAndUpdate(id, {
+    const updatedData = await contactUs.findByIdAndUpdate(id, {
       firstname,
       lastname,
       email,
@@ -105,6 +105,7 @@ export const updateMessage = async (req, res) => {
     return res.status(200).json({
       statusbar: "Success",
       message: "Message Updated Succefully",
+      data: updatedData,
     });
   } catch (error) {
     return res.status(500).json({

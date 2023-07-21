@@ -7,8 +7,8 @@ export const CreateBlog = async (req, res) => {
   let { title, blogImage, content, author, dateCreated } = req.body;
   console.log(req.users);
   try {
-     let result;
-     if (req.file) result = await uploadToCloud(req.file, res);
+    let result;
+    if (req.file) result = await uploadToCloud(req.file, res);
     const makeBlog = await blog.create({
       title,
       blogImage: result?.secure_url || "profile.jpg",
@@ -110,9 +110,9 @@ export const UpdateeBlog = async (req, res) => {
         message: "Id Not Found",
       });
     }
-     let result;
-     if (req.file) result = await uploadToCloud(req.file, res);
-    await blog.findByIdAndUpdate(id, {
+    let result;
+    if (req.file) result = await uploadToCloud(req.file, res);
+    const updatedData = await blog.findByIdAndUpdate(id, {
       title,
       blogImage: result?.secure_url || "profile.jpg",
       content,
@@ -122,8 +122,9 @@ export const UpdateeBlog = async (req, res) => {
     return res.status(200).json({
       statusbar: "Success",
       message: "Blog updated Successfully",
+      data: updatedData,
     });
-  } catch (erroe) {
+  } catch (error) {
     return res.status(500).json({
       statusbar: "Failed",
       message: "Can't Create Blog",

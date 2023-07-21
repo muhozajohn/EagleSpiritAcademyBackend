@@ -111,7 +111,7 @@ export const UpdateeEvent = async (req, res) => {
     }
      let result;
      if (req.file) result = await uploadToCloud(req.file, res);
-    await event.findByIdAndUpdate(id, {
+   const updatedData =  await event.findByIdAndUpdate(id, {
       title,
       eventImage: result?.secure_url || "profile.jpg",
       content,
