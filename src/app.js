@@ -14,6 +14,7 @@ import userRoutes from "./routes/userRoutes";
 import eventRoutes from "./routes/eventsRoutes";
 import NewsRoutes from "./routes/newsRoutes";
 import CouncilRoutes from "./routes/CouncilRoutes";
+import adimisionRoutes from "./routes/admissionRoutes";
 
 const app = express();
 dotenv.config();
@@ -47,7 +48,6 @@ const options = {
     servers: [
       {
         url: "https://eaglespiritacademy.onrender.com",
-
       },
     ],
   },
@@ -73,6 +73,7 @@ app.use("/api/EagleSpritAcademy/users", userRoutes);
 app.use("/api/EagleSpritAcademy/events", eventRoutes);
 app.use("/api/EagleSpritAcademy/news", NewsRoutes);
 app.use("/api/EagleSpritAcademy/council", CouncilRoutes);
+app.use("/api/EagleSpritAcademy/admision", adimisionRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({
