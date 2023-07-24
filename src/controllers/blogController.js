@@ -113,7 +113,7 @@ export const UpdateeBlog = async (req, res) => {
     let result;
     if (req.file) result = await uploadToCloud(req.file, res);
     const updatedData = await blog.findByIdAndUpdate(id, {
-      title,
+      title: title,
       blogImage: result?.secure_url || "profile.jpg",
       content,
       author,
@@ -127,7 +127,7 @@ export const UpdateeBlog = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       statusbar: "Failed",
-      message: "Can't Create Blog",
+      message: "Update failed",
       error: error.message,
     });
   }
