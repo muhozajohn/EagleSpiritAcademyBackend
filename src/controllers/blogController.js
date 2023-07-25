@@ -11,7 +11,9 @@ export const CreateBlog = async (req, res) => {
     if (req.file) result = await uploadToCloud(req.file, res);
     const makeBlog = await blog.create({
       title,
-      blogImage: result?.secure_url || "profile.jpg",
+      blogImage:
+        result?.secure_url ||
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
       content,
       author: req.users.lastname,
       dateCreated,
@@ -114,7 +116,9 @@ export const UpdateeBlog = async (req, res) => {
     if (req.file) result = await uploadToCloud(req.file, res);
     const updatedData = await blog.findByIdAndUpdate(id, {
       title: title,
-      blogImage: result?.secure_url || "profile.jpg",
+      blogImage:
+        result?.secure_url ||
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
       content,
       author,
       dateCreated,

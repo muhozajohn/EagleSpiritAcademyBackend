@@ -11,7 +11,9 @@ export const Createnews = async (req, res) => {
     if (req.file) result = await uploadToCloud(req.file, res);
     const makenews = await news.create({
       title,
-      newsImage: result?.secure_url || "profile.jpg",
+      newsImage:
+        result?.secure_url ||
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
       content,
       author: req.users.lastname,
     });
@@ -20,7 +22,7 @@ export const Createnews = async (req, res) => {
       message: "news Created Successfully",
       data: makenews,
     });
-  } catch (erroe) {
+  } catch (error) {
     return res.status(500).json({
       statusbar: "Failed",
       message: "Can't Create news",
@@ -113,7 +115,9 @@ export const Updateenews = async (req, res) => {
     if (req.file) result = await uploadToCloud(req.file, res);
     const updatedData = await news.findByIdAndUpdate(id, {
       title,
-      newsImage: result?.secure_url || "profile.jpg",
+      newsImage:
+        result?.secure_url ||
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
       content,
       author,
     });
@@ -122,7 +126,7 @@ export const Updateenews = async (req, res) => {
       message: "news updated Successfully",
       data: updatedData,
     });
-  } catch (erroe) {
+  } catch (error) {
     return res.status(500).json({
       statusbar: "Failed",
       message: "Can't update news",

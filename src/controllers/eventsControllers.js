@@ -11,7 +11,9 @@ export const CreateEvent = async (req, res) => {
     if (req.file) result = await uploadToCloud(req.file, res);
     const makeEvent = await event.create({
       title,
-      eventImage: result?.secure_url || "profile.jpg",
+      eventImage:
+        result?.secure_url ||
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
       content,
       author: req.users.lastname,
     });
@@ -111,12 +113,14 @@ export const UpdateeEvent = async (req, res) => {
     }
      let result;
      if (req.file) result = await uploadToCloud(req.file, res);
-   const updatedData =  await event.findByIdAndUpdate(id, {
-      title,
-      eventImage: result?.secure_url || "profile.jpg",
-      content,
-      author,
-    });
+   const updatedData = await event.findByIdAndUpdate(id, {
+     title,
+     eventImage:
+       result?.secure_url ||
+       "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+     content,
+     author,
+   });
     return res.status(200).json({
       statusbar: "Success",
       message: "Event updated Successfully",
