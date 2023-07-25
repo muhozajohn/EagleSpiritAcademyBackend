@@ -15,6 +15,9 @@ import eventRoutes from "./routes/eventsRoutes";
 import NewsRoutes from "./routes/newsRoutes";
 import CouncilRoutes from "./routes/CouncilRoutes";
 import adimisionRoutes from "./routes/admissionRoutes";
+import facilityRoutes from "./routes/facilityRoutes";
+import facultyRoutes from "./routes/FacultyRoutes";
+import StudentRoutes from "./routes/StudentRoutes";
 
 const app = express();
 dotenv.config();
@@ -74,6 +77,10 @@ app.use("/api/EagleSpritAcademy/events", eventRoutes);
 app.use("/api/EagleSpritAcademy/news", NewsRoutes);
 app.use("/api/EagleSpritAcademy/council", CouncilRoutes);
 app.use("/api/EagleSpritAcademy/admision", adimisionRoutes);
+app.use("/api/EagleSpritAcademy/facility", facilityRoutes);
+app.use("/api/EagleSpritAcademy/faculty", facultyRoutes);
+app.use("/api/EagleSpritAcademy/Student", StudentRoutes);
+
 
 app.get("/", (req, res) => {
   res.status(200).json({
