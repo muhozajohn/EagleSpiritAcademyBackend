@@ -6,6 +6,7 @@ import morgan from "morgan";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 
+
 import applyRoutes from "./routes/applyRoutes";
 import contactUsRoutes from "./routes/contactUsRoutes";
 import blogRoutes from "./routes/blogRoutes";

@@ -82,7 +82,7 @@ export const deletetFac = async (req, res) => {
         message: "Id Not Found",
       });
     }
-    await facilitiesModel.findByIdAndDelete();
+    await facilitiesModel.findByIdAndDelete(id);
     return res.status(200).json({
       statusbar: "Sucess",
       message: "Facility Deleted Well",

@@ -1,6 +1,8 @@
 import apply from "../models/applyModels";
 import { uploadToCloud } from "../helper/cloud";
-// create
+import nodemailer from "nodemailer";
+
+
 export const createApplication = async (req, res) => {
   let {
     pname,
@@ -21,8 +23,8 @@ export const createApplication = async (req, res) => {
     stState,
   } = req.body;
   try {
-    const userEmail = await users.findOne({
-      email: req.body.email,
+    const userEmail = await apply.findOne({
+      pmail: req.body.pmail,
     });
     if (userEmail) {
       return res.status(500).json({
@@ -52,6 +54,31 @@ export const createApplication = async (req, res) => {
       stCity,
       stState,
     });
+
+    // create
+
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "muhozajohn250@gmail.com",
+        pass: "nizejtefhzbgxtrp",
+      },
+    });
+    let mailOptions = {
+      from: "eaglespiritacademy2020@gmail.com",
+      to: pmail,
+      subject: "Application Status",
+      // text: "Congratulations you have successfully registered",
+      html: "<h1>Welcome to Eagle Sprit Academy </h1> <br/> Congratulations you have successfully registered <a href='https://eaglespirit.vercel.app/'> Back on it </a> ",
+    };
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent: " + mailOptions.to, info.response);
+      }
+    });
+
     return res.status(201).json({
       statusbar: "success",
       message: "Application created successfully",
