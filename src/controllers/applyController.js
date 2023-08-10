@@ -129,7 +129,7 @@ export const updateApplicationStatus = async (req, res) => {
 
     return res.status(200).json({
       statusbar: "success",
-      message: "Updated well",
+      message: "Student Approved well !!",
       data: upStatus,
     });
   } catch (error) {
