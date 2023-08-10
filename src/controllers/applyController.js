@@ -1,7 +1,7 @@
 import apply from "../models/applyModels";
 import { uploadToCloud } from "../helper/cloud";
 import nodemailer from "nodemailer";
-
+import sendMail from "../helper/sendMail";
 
 export const createApplication = async (req, res) => {
   let {
@@ -57,27 +57,36 @@ export const createApplication = async (req, res) => {
 
     // create
 
-    let transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "muhozajohn250@gmail.com",
-        pass: "nizejtefhzbgxtrp",
-      },
-    });
-    let mailOptions = {
-      from: "eaglespiritacademy2020@gmail.com",
-      to: pmail,
-      subject: "Application Status",
-      // text: "Congratulations you have successfully registered",
-      html: "<h1>Welcome to Eagle Sprit Academy </h1> <br/> Congratulations you have successfully registered <a href='https://eaglespirit.vercel.app/'> Back on it </a> ",
+    // let transporter = nodemailer.createTransport({
+    //   service: "gmail",
+    //   auth: {
+    //     user: "muhozajohn250@gmail.com",
+    //     pass: "nizejtefhzbgxtrp",
+    //   },
+    // });
+    // let mailOptions = {
+    //   from: "eaglespiritacademy2020@gmail.com",
+    //   to: pmail,
+    //   subject: "Application Status",
+    //   // text: "Congratulations you have successfully registered",
+    //   html: "<h1>Welcome to Eagle Sprit Academy </h1> <br/> Congratulations you have successfully registered <a href='https://eaglespirit.vercel.app/'> Back on it </a> ",
+    // };
+    // transporter.sendMail(mailOptions, (error, info) => {
+    //   if (error) {
+    //     console.log(error);
+    //   } else {
+    //     console.log("Email sent: " + mailOptions.to, info.response);
+    //   }
+    // });
+
+    const emailTemplate = {
+      emailTo: pmail,
+      subject: "Application Request Status",
+      message: `<h1> Dear ${pname}, </h1> <br/>  We are excited to confirm your successful registration with [Eagle Sprit Academy]. Welcome aboard!`,
+      // "<h1>Welcome to Eagle Sprit Academy </h1> <br/> Congratulations you have successfully registered <a href='https://eaglespirit.vercel.app/'> Back on it </a> ",
     };
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log("Email sent: " + mailOptions.to, info.response);
-      }
-    });
+
+    sendMail(emailTemplate);
 
     return res.status(201).json({
       statusbar: "success",
@@ -92,6 +101,46 @@ export const createApplication = async (req, res) => {
     });
   }
 };
+
+//Update Satus
+
+export const updateApplicationStatus = async (req, res) => {
+  let { statusAp } = req.body;
+  const { id } = req.params;
+  try {
+    const application = await apply.findById(id);
+    if (!application) {
+      return res.status(404).json({
+        message: "Id not found",
+      });
+    }
+
+    const upStatus = await apply.findByIdAndUpdate(id, {
+      statusAp: "approved",
+    });
+
+    const emailTemplate = {
+      emailTo: application.pmail,
+      subject: "Application Confirmation Status",
+      message: `<h1> Dear ${application.pname}, </h1> <br/>  We are excited to confirm you that your request successful Confirmed with [Eagle Sprit Academy]. Welcome aboard!`,
+    };
+
+    sendMail(emailTemplate);
+
+    return res.status(200).json({
+      statusbar: "success",
+      message: "Updated well",
+      data: upStatus,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      statusbar: "Failed",
+      message: "Status Failed to be Updated",
+      error: error.message,
+    });
+  }
+};
+
 // Get Alll
 export const getAllAplicant = async (req, res) => {
   try {

@@ -68,6 +68,11 @@ const applySchema = new mongoose.Schema(
       type: String,
       require: false,
     },
+    statusAp: {
+      type: String,
+      default: "progress",
+      require: false,
+    },
   },
   {
     timestamps: true,
