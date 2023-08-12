@@ -81,9 +81,11 @@ export const createApplication = async (req, res) => {
 
     const emailTemplate = {
       emailTo: pmail,
-      subject: "Application Request Status",
-      message: `<h1> Dear ${pname}, </h1> <br/>  We are excited to confirm your successful registration with [Eagle Sprit Academy]. Welcome aboard!`,
-      // "<h1>Welcome to Eagle Sprit Academy </h1> <br/> Congratulations you have successfully registered <a href='https://eaglespirit.vercel.app/'> Back on it </a> ",
+      subject: "Application Received - Confirmation Soon",
+      message: `<h1> Dear ${pname}, </h1> <br/>   We're pleased to inform you that we've received your child's application. Thank you for choosing Eagle spirit academy. Our team is reviewing applications, and we'll be in touch shortly with confirmation. Your patience is appreciated. <br/> <br/> <br/> 
+      <p> Best regards,</p><br/>
+      <p>David Andrew Wambuzi</p><br/>
+       <p>Eagle Spirit Academy Principle  </p><br/> `,
     };
 
     sendMail(emailTemplate);
@@ -121,8 +123,16 @@ export const updateApplicationStatus = async (req, res) => {
 
     const emailTemplate = {
       emailTo: application.pmail,
-      subject: "Application Confirmation Status",
-      message: `<h1> Dear ${application.pname}, </h1> <br/>  We are excited to confirm you that your request successful Confirmed with [Eagle Sprit Academy]. Welcome aboard!`,
+      subject: "Application Update for Your Child",
+      message: `<h1> Dear ${application.pname}, </h1> <br/>  We have reviewed your child's application and are pleased to inform you that they have been confirmed for the next phase of the process. Kindly refer to the details outlined in this article: https://eaglespiritacademy.rw/admission. For further information, please follow the provided guidelines.
+      <br />
+      <br />
+      <br />
+      <p> Best regards,</p> <br />
+      <p> David Andrew Wambuzi</p> <br />
+      <p> Contact: +250 782 074 097</p> 
+
+      `,
     };
 
     sendMail(emailTemplate);
