@@ -52,19 +52,45 @@ const applySchema = new mongoose.Schema(
       type: Date,
       require: true,
     },
-    stMail: {
+    stAge: {
       type: String,
       require: false,
     },
-    stNationality: {
+    // Background
+    prevSchool: {
       type: String,
       require: true,
     },
-    stCity: {
+    prevGradeClass: {
       type: String,
       require: true,
     },
-    stState: {
+    currentGradeClass: {
+      type: String,
+      require: false,
+    },
+    // Schooladdress
+    country:{
+      type: String,
+      require: true,
+    },
+    province:{
+      type: String,
+      require: true,
+    },
+    city:{
+      type: String,
+      require: true,
+    },
+    cityState:{
+      type: String,
+      require: true,
+    },
+    schoolMail:{
+      type: String,
+      require: false,
+    },
+    reasons:{
       type: String,
       require: false,
     },

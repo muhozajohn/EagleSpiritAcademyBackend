@@ -17,10 +17,16 @@ export const createApplication = async (req, res) => {
     stProfile,
     stGender,
     stBirth,
-    stMail,
-    stNationality,
-    stCity,
-    stState,
+    stAge,
+    prevSchool,
+    prevGradeClass,
+    currentGradeClass,
+    country,
+    province,
+    city,
+    cityState,
+    schoolMail,
+    reasons,
   } = req.body;
   try {
     const userEmail = await apply.findOne({
@@ -49,10 +55,16 @@ export const createApplication = async (req, res) => {
         "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
       stGender,
       stBirth,
-      stMail,
-      stNationality,
-      stCity,
-      stState,
+      stAge,
+      prevSchool,
+      prevGradeClass,
+      currentGradeClass,
+      country,
+      province,
+      city,
+      cityState,
+      schoolMail,
+      reasons,
     });
 
     // create
@@ -195,22 +207,28 @@ export const getApplicantByID = async (req, res) => {
 // update
 export const updateApplicant = async (req, res) => {
   let {
-    pname,
-    pnumber,
-    pmail,
-    pnationality,
-    pcity,
-    pstate,
-    stName,
-    stMiddleName,
-    stLname,
-    stProfile,
-    stGender,
-    stBirth,
-    stMail,
-    stNationality,
-    stCity,
-    stState,
+   pname,
+      pnumber,
+      pmail,
+      pnationality,
+      pcity,
+      pstate,
+      stName,
+      stMiddleName,
+      stLname,
+      stProfile,
+      stGender,
+      stBirth,
+      stAge,
+      prevSchool,
+      prevGradeClass,
+      currentGradeClass,
+      country,
+      province,
+      city,
+      cityState,
+      schoolMail,
+      reasons,
   } = req.body;
   try {
     const { id } = req.params;
@@ -221,6 +239,8 @@ export const updateApplicant = async (req, res) => {
         message: "Id Not Found",
       });
     }
+     let result;
+     if (req.file) result = await uploadToCloud(req.file, res);
     const updateApp = await apply.findByIdAndUpdate(
       id,
       {
@@ -233,13 +253,21 @@ export const updateApplicant = async (req, res) => {
         stName,
         stMiddleName,
         stLname,
-        stProfile,
+        stProfile:
+          result?.secure_url ||
+          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
         stGender,
         stBirth,
-        stMail,
-        stNationality,
-        stCity,
-        stState,
+        stAge,
+        prevSchool,
+        prevGradeClass,
+        currentGradeClass,
+        country,
+        province,
+        city,
+        cityState,
+        schoolMail,
+        reasons,
       },
       { new: true }
     );
