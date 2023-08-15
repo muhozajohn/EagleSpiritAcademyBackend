@@ -19,6 +19,9 @@ import adimisionRoutes from "./routes/admissionRoutes";
 import facilityRoutes from "./routes/facilityRoutes";
 import facultyRoutes from "./routes/FacultyRoutes";
 import StudentRoutes from "./routes/StudentRoutes";
+import beforeRoutes from "./routes/admission/beforeRoutes";
+import howToApplyRoutes from "./routes/admission/howToApplyRoutes";
+import afterRoutes from "./routes/admission/afterRoutes";
 
 const app = express();
 dotenv.config();
@@ -81,6 +84,9 @@ app.use("/api/EagleSpritAcademy/admision", adimisionRoutes);
 app.use("/api/EagleSpritAcademy/facility", facilityRoutes);
 app.use("/api/EagleSpritAcademy/faculty", facultyRoutes);
 app.use("/api/EagleSpritAcademy/Student", StudentRoutes);
+app.use("/api/EagleSpritAcademy/admission/before", beforeRoutes);
+app.use("/api/EagleSpritAcademy/admission/howToApply", howToApplyRoutes);
+app.use("/api/EagleSpritAcademy/admission/after", afterRoutes);
 
 
 app.get("/", (req, res) => {
