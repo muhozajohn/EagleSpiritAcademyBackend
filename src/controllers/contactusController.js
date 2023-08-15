@@ -18,7 +18,7 @@ export const createMessage = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       statusbar: "Failed",
-      message: "Can't Create Message",
+      message: "Message Sent Failed",
       error: error.message,
     });
   }
