@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const beforeApplySchemma = new mongoose.Schema(
+const AfterApplySchema = new mongoose.Schema(
   {
     field: {
       type: String,
@@ -31,7 +31,5 @@ const beforeApplySchemma = new mongoose.Schema(
   }
 );
 
-const beforeApply = mongoose.model("beforeApply", beforeApplySchemma);
-export default beforeApply;
-
-
+const AfterApply = mongoose.model("AfterApply", AfterApplySchema);
+export default AfterApply;

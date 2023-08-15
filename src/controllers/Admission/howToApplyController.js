@@ -1,24 +1,22 @@
 // import contactUs from "../models/contactusModeles";
-import beforeApply from "../../models/Admission/BeforeApplyModel";
+import howToApply from "../../models/Admission/HowTo";
 
+// Add Before Apply info
 
-// Add Before Apply info 
-
-export const createBefore = async (req, res) => {
+export const createHowToApply = async (req, res) => {
   try {
     const { id } = req.params;
-    let { field, field2, field3, field4, field5 } = req.body;
-    
-    const updatedData = await beforeApply.create({
+    let { field, field2, field3, field4 } = req.body;
+
+    const updatedData = await howToApply.create({
       field,
       field2,
       field3,
       field4,
-      field5,
     });
     return res.status(200).json({
       statusbar: "Success",
-      message: "Well Inserted ✅✅",
+      message: "Well Created ✅✅",
       data: updatedData,
     });
   } catch (error) {
@@ -31,12 +29,12 @@ export const createBefore = async (req, res) => {
 };
 
 // retrieve Information
-export const readBefore = async (req, res) => {
+export const readHowToApply = async (req, res) => {
   try {
-    const read = await beforeApply.find();
+    const read = await howToApply.find();
     return res.status(200).json({
       statusbar: "Success",
-      message: "Before Application retrived Succefully",
+      message: "How to  Apply info retrieved Successfully",
       data: read,
     });
   } catch (error) {
@@ -49,23 +47,22 @@ export const readBefore = async (req, res) => {
 };
 
 // UpdateMessage
-export const updateBefore = async (req, res) => {
+export const updateHowToApply = async (req, res) => {
   try {
     const { id } = req.params;
-    let { field, field2, field3, field4, field5 } = req.body;
-    const updateBefore = await beforeApply.findById(id);
+    let { field, field2, field3, field4 } = req.body;
+    const updateBefore = await howToApply.findById(id);
     if (!updateBefore) {
       return res.status(404).json({
         statusbar: "Failed",
         message: "Id Not Found",
       });
     }
-    const updatedData = await beforeApply.findByIdAndUpdate(id, {
+    const updatedData = await howToApply.findByIdAndUpdate(id, {
       field,
       field2,
       field3,
       field4,
-      field5,
     });
     return res.status(200).json({
       statusbar: "Success",

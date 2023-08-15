@@ -1,20 +1,18 @@
 // import contactUs from "../models/contactusModeles";
-import beforeApply from "../../models/Admission/BeforeApplyModel";
+import AfterApply from "../../models/Admission/AfterApplyModel";
 
+// Add After Apply info
 
-// Add Before Apply info 
-
-export const createBefore = async (req, res) => {
+export const createAfter = async (req, res) => {
   try {
     const { id } = req.params;
     let { field, field2, field3, field4, field5 } = req.body;
-    
-    const updatedData = await beforeApply.create({
+
+    const updatedData = await AfterApply.create({
       field,
       field2,
       field3,
       field4,
-      field5,
     });
     return res.status(200).json({
       statusbar: "Success",
@@ -31,12 +29,12 @@ export const createBefore = async (req, res) => {
 };
 
 // retrieve Information
-export const readBefore = async (req, res) => {
+export const readAfter = async (req, res) => {
   try {
-    const read = await beforeApply.find();
+    const read = await AfterApply.find();
     return res.status(200).json({
       statusbar: "Success",
-      message: "Before Application retrived Succefully",
+      message: "After Application retrived Succefully",
       data: read,
     });
   } catch (error) {
@@ -49,23 +47,22 @@ export const readBefore = async (req, res) => {
 };
 
 // UpdateMessage
-export const updateBefore = async (req, res) => {
+export const updateAfter = async (req, res) => {
   try {
     const { id } = req.params;
     let { field, field2, field3, field4, field5 } = req.body;
-    const updateBefore = await beforeApply.findById(id);
-    if (!updateBefore) {
+    const updateAfter = await AfterApply.findById(id);
+    if (!updateAfter) {
       return res.status(404).json({
         statusbar: "Failed",
         message: "Id Not Found",
       });
     }
-    const updatedData = await beforeApply.findByIdAndUpdate(id, {
+    const updatedData = await AfterApply.findByIdAndUpdate(id, {
       field,
       field2,
       field3,
       field4,
-      field5,
     });
     return res.status(200).json({
       statusbar: "Success",
