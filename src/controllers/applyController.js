@@ -25,6 +25,7 @@ export const createApplication = async (req, res) => {
     province,
     city,
     cityState,
+    schoolPhone,
     schoolMail,
     reasons,
   } = req.body;
@@ -63,6 +64,7 @@ export const createApplication = async (req, res) => {
       province,
       city,
       cityState,
+      schoolPhone,
       schoolMail,
       reasons,
     });
@@ -227,6 +229,7 @@ export const updateApplicant = async (req, res) => {
       province,
       city,
       cityState,
+      schoolPhone,
       schoolMail,
       reasons,
   } = req.body;
@@ -266,6 +269,7 @@ export const updateApplicant = async (req, res) => {
         province,
         city,
         cityState,
+        schoolPhone,
         schoolMail,
         reasons,
       },

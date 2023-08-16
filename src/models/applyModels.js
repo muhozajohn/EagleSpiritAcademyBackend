@@ -70,27 +70,31 @@ const applySchema = new mongoose.Schema(
       require: false,
     },
     // Schooladdress
-    country:{
+    country: {
       type: String,
       require: true,
     },
-    province:{
+    province: {
       type: String,
       require: true,
     },
-    city:{
+    city: {
       type: String,
       require: true,
     },
-    cityState:{
+    cityState: {
       type: String,
       require: true,
     },
-    schoolMail:{
+    schoolPhone: {
+      type: String,
+      require: true,
+    },
+    schoolMail: {
       type: String,
       require: false,
     },
-    reasons:{
+    reasons: {
       type: String,
       require: false,
     },
