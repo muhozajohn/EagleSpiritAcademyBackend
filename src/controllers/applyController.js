@@ -1,6 +1,5 @@
 import apply from "../models/applyModels";
 import { uploadToCloud } from "../helper/cloud";
-import nodemailer from "nodemailer";
 import sendMail from "../helper/sendMail";
 
 export const createApplication = async (req, res) => {
