@@ -96,7 +96,7 @@ export const createApplication = async (req, res) => {
     const emailTemplate = {
       emailTo: pmail,
       subject: "Application Received - Confirmation Soon",
-      message: `<h1> Dear ${pname}, </h1> <br/>   We're pleased to inform you that we've received your child's application. Thank you for choosing Eagle spirit academy. Our team is reviewing applications, and we'll be in touch shortly with confirmation. Your patience is appreciated. <br/> <br/> <br/> 
+      message: `<h1> Dear ${pname}, </h1> <br/>   We're pleased to inform you that we've received wellx your child's application. Thank you for choosing Eagle spirit academy. Our team is reviewing applications, and we'll be in touch shortly with confirmation. Your patience is appreciated. <br/> <br/> <br/> 
       <p> Best regards,</p><br/>
       <p>David Andrew Wambuzi</p><br/>
        <p>Eagle Spirit Academy Principle  </p><br/> `,
