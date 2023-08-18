@@ -21,6 +21,10 @@ const contactusSchemma = new mongoose.Schema(
       type: String,
       require: true,
     },
+    reply: {
+      type: String,
+      default: "",
+    },
   },
   {
     timestamps: true,

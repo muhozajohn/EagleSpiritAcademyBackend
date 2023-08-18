@@ -1,4 +1,5 @@
 import contactUs from "../models/contactusModeles";
+import sendMail from "../helper/sendMail";
 // Send message
 export const createMessage = async (req, res) => {
   let { firstname, lastname, email, Tel, message } = req.body;
@@ -111,6 +112,42 @@ export const updateMessage = async (req, res) => {
     return res.status(500).json({
       statusbar: "Failed",
       message: "Can't Update Message",
+      error: error.message,
+    });
+  }
+};
+
+// reply Message
+export const replyMessage = async (req, res) => {
+  let { reply } = req.body;
+  let { id } = req.params;
+  try {
+    const findId = await contactUs.findById(id);
+    if (!findId) {
+      return res.status(404).json({
+        message: "Failed to find contact Id",
+      });
+    }
+    const replyM = await contactUs.findByIdAndUpdate(id, {
+      reply,
+    });
+
+    const emailTemplate = {
+      emailTo: findId.email,
+      subject: "Message from Eagle Sprit Academy",
+      message: reply,
+    };
+
+    sendMail(emailTemplate);
+    return res.status(200).json({
+      statusbar: "success",
+      message: "Reply Sent successfully",
+      data: replyM,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      statusbar: "Failed",
+      message: "Failed to reply message",
       error: error.message,
     });
   }
