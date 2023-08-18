@@ -6,7 +6,6 @@ import morgan from "morgan";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 
-
 import applyRoutes from "./routes/applyRoutes";
 import contactUsRoutes from "./routes/contactUsRoutes";
 import blogRoutes from "./routes/blogRoutes";
@@ -22,6 +21,9 @@ import StudentRoutes from "./routes/StudentRoutes";
 import beforeRoutes from "./routes/admission/beforeRoutes";
 import howToApplyRoutes from "./routes/admission/howToApplyRoutes";
 import afterRoutes from "./routes/admission/afterRoutes";
+import programRoutes from "./routes/about/programRoutes";
+import lifeRoutes from "./routes/about/lifeRouter";
+import parentRoutes from "./routes/about/parentRouter";
 
 const app = express();
 dotenv.config();
@@ -87,7 +89,9 @@ app.use("/api/EagleSpritAcademy/Student", StudentRoutes);
 app.use("/api/EagleSpritAcademy/admission/before", beforeRoutes);
 app.use("/api/EagleSpritAcademy/admission/howToApply", howToApplyRoutes);
 app.use("/api/EagleSpritAcademy/admission/after", afterRoutes);
-
+app.use("/api/EagleSpritAcademy/about/program", programRoutes);
+app.use("/api/EagleSpritAcademy/about/life", lifeRoutes);
+app.use("/api/EagleSpritAcademy/about/parent", parentRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({
