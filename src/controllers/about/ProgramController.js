@@ -49,8 +49,8 @@ export const updateProgram = async (req, res) => {
   try {
     const { id } = req.params;
     let { field1, field2, field3} = req.body;
-    const programModel = await programModel.findById(id);
-    if (!programModel) {
+    const programData = await programModel.findById(id);
+    if (!programData) {
       return res.status(404).json({
         statusbar: "Failed",
         message: "Id Not Found",
