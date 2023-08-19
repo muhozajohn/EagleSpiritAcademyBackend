@@ -24,6 +24,8 @@ import afterRoutes from "./routes/admission/afterRoutes";
 import programRoutes from "./routes/about/programRoutes";
 import lifeRoutes from "./routes/about/lifeRouter";
 import parentRoutes from "./routes/about/parentRouter";
+import MvcRoutes from "./routes/MVCRoutes";
+import welcomeRoutes from "./routes/welcomeRoutes";
 
 const app = express();
 dotenv.config();
@@ -92,6 +94,8 @@ app.use("/api/EagleSpritAcademy/admission/after", afterRoutes);
 app.use("/api/EagleSpritAcademy/about/program", programRoutes);
 app.use("/api/EagleSpritAcademy/about/life", lifeRoutes);
 app.use("/api/EagleSpritAcademy/about/parent", parentRoutes);
+app.use("/api/EagleSpritAcademy/home", MvcRoutes);
+app.use("/api/EagleSpritAcademy/home", welcomeRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({
