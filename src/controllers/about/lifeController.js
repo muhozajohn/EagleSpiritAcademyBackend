@@ -49,8 +49,8 @@ export const updateLife = async (req, res) => {
   try {
     const { id } = req.params;
     let { field1, field2, field3} = req.body;
-    const lifeModel = await lifeModel.findById(id);
-    if (!lifeModel) {
+    const lifeData = await lifeModel.findById(id);
+    if (!lifeData) {
       return res.status(404).json({
         statusbar: "Failed",
         message: "Id Not Found",
