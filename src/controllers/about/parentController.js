@@ -49,8 +49,8 @@ export const updateParent = async (req, res) => {
   try {
     const { id } = req.params;
     let { field1, field2, field3 } = req.body;
-    const parentModel = await parentModel.findById(id);
-    if (!parentModel) {
+    const parentData = await parentModel.findById(id);
+    if (!parentData) {
       return res.status(404).json({
         statusbar: "Failed",
         message: "Id Not Found",
