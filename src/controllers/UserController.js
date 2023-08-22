@@ -110,6 +110,32 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
+// getSingle user
+
+export const getSingle = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const getId = await users.findById(id);
+    if (!getId) {
+      return res.status(404).json({
+        statusbar: "Failed",
+        message: "User id Not Found",
+      });
+    }
+    return res.status(200).json({
+      statusbar: "Job Done",
+      message: "Single User Geted Well",
+      data: getId,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      statusbar: "Faileed",
+      message: "Failed to get Sungle user",
+      error: error.message,
+    });
+  }
+};
+
 // Update User
 
 export const updateUsers = async (req, res) => {

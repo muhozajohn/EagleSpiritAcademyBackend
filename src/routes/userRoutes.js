@@ -4,6 +4,7 @@ import {
   createUser,
   deleteUsers,
   getAllUsers,
+  getSingle,
   login,
   updateUsers,
 } from "../controllers/UserController";
@@ -14,6 +15,7 @@ userRoutes.post("/create", fileUpload.single("userProfile"), createUser);
 userRoutes.put("/update/:id", fileUpload.single("userProfile"), updateUsers);
 userRoutes.post("/login", fileUpload.single("userProfile"), login);
 userRoutes.get("/read", getAllUsers);
+userRoutes.get("/read/:id", getSingle);
 userRoutes.delete("/delete/:id", deleteUsers);
 
 export default userRoutes;
