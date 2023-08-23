@@ -5,12 +5,12 @@ export const sendMail = (emailTemplate) => {
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "muhozajohn250@gmail.com",
-      pass: "nizejtefhzbgxtrp",
+      user: "eglespiritacademy@gmail.com",
+      pass: "izygcbfqqmykmtwv",
     },
   });
   let mailOptions = {
-    from: "eaglespiritacademy2020@gmail.com",
+    from: "eglespiritacademy@gmail.com",
     to: emailTo,
     subject,
     // text: "Congratulations you have successfully registered",
