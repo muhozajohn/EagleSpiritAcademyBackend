@@ -15,7 +15,7 @@ blogRoutes.post("/createBlog", Authorization, fileUpload.single("blogImage"), Cr
 blogRoutes.get("/readBlog", getAllBlog);
 blogRoutes.get("/readOneBlog/:id", getOneBlog);
 blogRoutes.delete("/deleteBlog/:id", deleteBlog);
-// blogRoutes.put("/updateBlog/:id",Authorization, fileUpload.single("blogImage"), UpdateeBlog);
-blogRoutes.patch("/updateBlog/:id",Authorization, fileUpload.single("blogImage"), UpdateeBlog);
+blogRoutes.put("/updateBlog/:id",Authorization, fileUpload.single("blogImage"), UpdateeBlog);
+
 
 export default blogRoutes;
